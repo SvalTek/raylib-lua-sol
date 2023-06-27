@@ -73,9 +73,14 @@ sudo dnf install alsa-lib-devel mesa-libGL-devel libX11-devel libXrandr-devel li
 git clone https://github.com/RobLoach/raylib-lua-sol.git
 cd raylib-lua-sol
 git submodule update --init
+git apply ./sol2_patch.diff
 cmake -B build .
 cmake --build build --config Release
 ```
+
+> NOTE: You can enable lua coroutine support by passing `-DBUILD_WITH_CO=ON` to cmake when configuring.
+> eg `cmake -DBUILD_WITH_CO=ON -B build .`
+
 
 ## Development
 
