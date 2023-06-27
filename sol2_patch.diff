@@ -1,0 +1,12 @@
+diff --git a/vendor/sol2/include/sol/stack_core.hpp b/vendor/sol2/include/sol/stack_core.hpp
+index aef8e47e..99457015 100644
+--- a/vendor/sol2/include/sol/stack_core.hpp
++++ b/vendor/sol2/include/sol/stack_core.hpp
+@@ -43,6 +43,7 @@
+ #include <algorithm>
+ #include <sstream>
+ #include <optional>
++#include <limits>
+
+ namespace sol {
+ 	namespace detail {
