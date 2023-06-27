@@ -96,7 +96,6 @@ int main(int argc, char *argv[])
         sol::lib::package,
         sol::lib::string,
         sol::lib::math,
-        sol::lib::table,
 #ifdef BUILD_WITH_CO
         sol::lib::coroutine,
 #endif
@@ -106,7 +105,7 @@ int main(int argc, char *argv[])
 #ifdef BUILD_WITH_DEBUG
         sol::lib::debug,  /** NOT WORKING YET */
 #endif
-    );
+        sol::lib::table);
 
     // Bootstrap Raylib.
     raylib_lua_sol(lua);
