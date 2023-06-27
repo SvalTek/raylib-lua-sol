@@ -92,21 +92,33 @@ int main(int argc, char *argv[])
     // Load some of the Lua base libraries.
     // TODO: Use JIT compiler
     lua.open_libraries(
-      sol::lib::base,
-      sol::lib::package,
-      sol::lib::string,
-      sol::lib::math,
-      sol::lib::table);
+        sol::lib::base,
+        sol::lib::package,
+        sol::lib::string,
+        sol::lib::math,
+        sol::lib::table,
+#ifdef BUILD_WITH_CO
+        sol::lib::coroutine,
+#endif
+#ifdef BUILD_WITH_OS
+        sol::lib::os, /** NOT WORKING YET */
+#endif
+#ifdef BUILD_WITH_DEBUG
+        sol::lib::debug,  /** NOT WORKING YET */
+#endif
+    );
 
     // Bootstrap Raylib.
     raylib_lua_sol(lua);
 
     // Execute the script.
     auto result = lua.safe_script_file(fileToLoad, sol::script_pass_on_error);
-    if (!result.valid()) {
-      sol::error err = result;
-      std::cerr << "The code was unable to run." << std::endl << err.what() << std::endl;
-      return 1;
+    if (!result.valid())
+    {
+        sol::error err = result;
+        std::cerr << "The code was unable to run." << std::endl
+                  << err.what() << std::endl;
+        return 1;
     }
 
     return 0;

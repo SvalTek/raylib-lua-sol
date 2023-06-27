@@ -30,6 +30,11 @@ endif()
 option(BUILD_BIN "Binary" ON)
 option(BUILD_EXAMPLES "Examples" ON)
 
+# Optional SOL2 lua libraries
+option(BUILD_WITH_CO "Enable build with coroutine" OFF)
+option(BUILD_WITH_OS "Enable build with os" OFF) ## Not working yet
+option(BUILD_WITH_DEBUG "Enable build with debug" OFF) ## Not working yet
+
 add_subdirectory(include)
 
 if (BUILD_BIN)
@@ -85,6 +90,17 @@ if (BUILD_BIN)
   set(SOL2_DIR vendor/sol2)
   add_library(sol2 INTERFACE)
   target_include_directories(sol2 INTERFACE ${SOL2_DIR}/include/)
+  if (BUILD_WITH_CO)
+      target_compile_definitions(sol2 INTERFACE BUILD_WITH_CO)
+  endif()
+
+  if (BUILD_WITH_OS)
+      target_compile_definitions(sol2 INTERFACE BUILD_WITH_OS) ## Not working yet
+  endif()
+
+  if (BUILD_WITH_DEBUG)
+      target_compile_definitions(sol2 INTERFACE BUILD_WITH_DEBUG) ## Not working yet
+  endif()
 
   # Add the binary.
   add_subdirectory(bin)
